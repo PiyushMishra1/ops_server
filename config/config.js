@@ -2,11 +2,11 @@ var express = require("express");
 const mysql = require("mysql2");
 require("dotenv").config();
 const connection = mysql.createConnection({
-  host: process.env.HOST,
-  port: process.env.DBPORT,
-  user: process.env.USER,
-  password: "",
-  database: process.env.DATABASE,
+  host: process.env.MYSQLHOST,
+  port: process.env.MYSQLPORT,
+  user: process.env.MYSQLUSER,
+  password: MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
 });
 
 connection.connect(function (err) {
