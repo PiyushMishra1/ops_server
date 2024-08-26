@@ -8,6 +8,6 @@ const {
 /* GET home page. */
 
 router.get("/", getLoginPage);
-router.post("/", authencateUser);
+router.post("/login", authencateUser);
 
 module.exports = router;
