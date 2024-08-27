@@ -23,7 +23,9 @@ module.exports = {
       if (password == Data[0].password) {
         res.json({
           status: true,
+          id: Data[0].id,
           message: "Login Successful",
+          token: Data[0].token,
           code: 200,
         });
       } else {
