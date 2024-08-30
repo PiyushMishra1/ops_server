@@ -3,6 +3,41 @@ const { createOrg } = require("../models/orgModel");
 const { getAllData } = require("../models/CRUDModel");
 
 module.exports = {
+  orgGet: async (req, res) => {
+    const authHeader = req.headers.authorization;
+    let token = null;
+
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
+    }
+
+    if (!token) {
+      return res.status(401).json({
+        status: false,
+        message: "Unauthorized. No token provided.",
+        code: 401,
+      });
+    }
+
+    const condition = {
+      record_status: 0,
+    };
+    const org_data = await getAllData("tbl_org_info", condition);
+    if (org_data) {
+      res.json({
+        status: true,
+        message: "Organization data retrieved successfully.",
+        code: 200,
+        data: org_data,
+      });
+    } else {
+      res.json({
+        status: false,
+        message: "Failed to retrieve organization data.",
+        code: 500,
+      });
+    }
+  },
   orgCreate: async (req, res) => {
     //condition for unique org.
     const authHeader = req.headers.authorization;

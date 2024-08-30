@@ -25,11 +25,11 @@ const updateTable = (tbl_name, condition, datatoUpdate) => {
     });
   });
 };
-const insertData = (tbl_name, condition, datatoInsert) => {
+const insertData = (tbl_name, datatoInsert) => {
   return new Promise((resolve, reject) => {
     const sql = `INSERT INTO ${tbl_name} SET ?`;
 
-    connection.query(sql, [datatoInsert], [condition], (err, result) => {
+    connection.query(sql, [datatoInsert], (err, result) => {
       if (err) reject(err);
       else {
         resolve(result && result.affectedRows > 0 ? true : false);
