@@ -35,7 +35,6 @@ module.exports = {
       created_at: date,
     };
 
-    console.log(datatoInsert);
     const hasEmptyValue = Object.values(datatoInsert).some(isEmpty);
 
     if (!hasEmptyValue) {
