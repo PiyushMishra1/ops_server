@@ -8,6 +8,8 @@ require("dotenv").config();
 const indexRouter = require("./routes/index");
 const jobRouter = require("./routes/jobs");
 const orgRouter = require("./routes/organization");
+const resumeRouter = require("./routes/resume");
+
 var app = express();
 
 // view engine setup
@@ -24,6 +26,8 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/job", jobRouter);
 app.use("/org", orgRouter);
+app.use("/resume", resumeRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

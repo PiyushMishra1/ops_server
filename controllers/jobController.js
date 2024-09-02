@@ -22,12 +22,25 @@ module.exports = {
       record_status: 0,
     };
     const job_data = await getAllData("tbl_jobs_info", condition);
-    if (job_data) {
+    if (job_data && job_data.length > 0) {
+      // Fetch organization data for each job
+      const jobsWithOrgData = await Promise.all(
+        job_data.map(async (job) => {
+          const orgCondition = { org_id: job.org_id }; // Assuming `org_id` is the key to link job and organization
+          const org_data = await getAllData("tbl_org_info", orgCondition);
+
+          return {
+            ...job,
+            org_data: org_data[0] || null, // Attach the first matching organization data
+          };
+        })
+      );
+
       res.json({
         status: true,
-        message: "Jobs data retrieved successfully.",
+        message: "Jobs and organization data retrieved successfully.",
         code: 200,
-        data: job_data,
+        data: jobsWithOrgData,
       });
     } else {
       res.json({
