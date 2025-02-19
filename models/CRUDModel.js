@@ -1,5 +1,25 @@
 const connection = require("../config/config");
 
+/*
+
+const adduser = () => {
+  try {
+  const query = "";
+
+  const [rows] = await connection.promise().execute(query, []);
+  return rows;
+
+  if (rows.affectedRows
+ {
+ return 
+  } catch (err) {
+  throw err;
+  }
+}
+
+
+*/
+
 const getAllData = (tbl_name, condition) => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT * FROM ${tbl_name} WHERE ?`;
